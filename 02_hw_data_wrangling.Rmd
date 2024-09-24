@@ -46,8 +46,6 @@ Use `dplyr` functions to create a table with the number of candidates in each ty
 ## Answer 1
 
 ```{r}
-
-
 library(dplyr)
 library(readr)
 
@@ -122,11 +120,11 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 ```{r}
 library(ggplot2)
 
-fb_ads |> 
-  mutate(impressions_millions <- (fb_ads$impressions/1000000))
-
-fb_ads <- fb_ads |>
+fb_ads <- fb_ads |> 
+  mutate(impressions_millions <- (fb_ads$impressions/1000000)) |>
   filter(office == "US House")
+
+  
 
 plot_q3 <- ggplot(data = fb_ads, mapping = aes(x = impressions_millions)) +
   geom_histogram() 
