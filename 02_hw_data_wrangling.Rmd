@@ -122,15 +122,15 @@ library(ggplot2)
 
 
 
-fb_ads |> 
+fb_ads <- fb_ads |> 
   mutate(impressions_millions = (fb_ads$impressions/1000000))
- # mutate(impressions_millions = (fb_ads$impressions/1000000)) 
+
 
  
 
 plot_q3 <- ggplot(data = fb_ads |> 
   filter(office == "US House"), 
-  mapping = aes(x = impressions_millions)) +
+  mapping = aes(impressions_millions)) +
   geom_histogram()
 
 plot_q3
@@ -160,6 +160,9 @@ You do not need to exactly match the labels, but you should have informative lab
 
 ## Answer 4
 
+```{r}
+
+```
 
 
 \newpage
