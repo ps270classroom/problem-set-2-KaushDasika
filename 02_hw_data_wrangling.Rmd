@@ -120,15 +120,15 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 ```{r}
 library(ggplot2)
 
-
+fb_ads <- read_csv("data/fb_ads.csv")
 
 fb_ads <- fb_ads |> 
-  mutate(impressions_millions = impressions / 1000000) |> 
-  filter(office == "US House")
+  mutate(impressions_millions = impressions / 1000000) 
 
 
 
-plot_q3 <- ggplot(data = fb_ads , 
+plot_q3 <- ggplot(data = fb_ads |> 
+  filter(office == "US House"), 
   mapping = aes(x = impressions_millions)) +
   geom_histogram()
 
@@ -161,8 +161,18 @@ You do not need to exactly match the labels, but you should have informative lab
 
 ```{r}
 
-fb_top_plot <- ggplot(data = fb_ads |>
-                        arrange(desc(impressions_millions)), aes(x=impressions_millions,y=cand_name_last)) + geom_bar()
+fb_ads <- fb_ads |>
+  arrange(desc(impressions_millions)) |>
+  slice_max(impressions_millions, n = 15) |>
+  mutate(cand_name_last = reorder(cand_name_last, impressions_millions))
+fb_ads
+
+fb_top_plot <- ggplot(data = fb_ads, 
+                      mapping = aes(x=impressions_millions,y=cand_name_last,fill = party)) + 
+  geom_bar() + labs(x = "Impressions (in Millions)", y = "Candidate Last Name", 
+       title = "Top 15 US House Candidates by Facebook Ad Impressions") +
+  scale_fill_manual(values = c(R = "red", D = "blue"))
+  
 
 
 fb_top_plot
