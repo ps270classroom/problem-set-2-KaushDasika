@@ -120,10 +120,10 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 ```{r}
 library(ggplot2)
 
-fb_ads <- na.omit(fb_ads)
+impressions_millions <- (sum(fb_ads$impressions))/1000000
 
 fb_ads <- fb_ads |> 
-  mutate(impressions_millions = (fb_ads$impressions/1000000)) |> 
+ # mutate(impressions_millions = (fb_ads$impressions/1000000)) |> 
   filter(office == "US House")
 
 
