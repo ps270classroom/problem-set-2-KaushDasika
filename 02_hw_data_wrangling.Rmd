@@ -123,14 +123,13 @@ library(ggplot2)
 
 #fb_ads <- read_csv("data/fb_ads.csv")
 
-fb_ads <- fb_ads |> 
-  filter(office == "US House") |> 
+fb_ads <- fb_ads  |> 
   mutate(impressions_millions = impressions/1000000) 
 
 
 
-plot_q3 <- ggplot(data = (fb_ads), 
-  mapping = aes(x = impressions_millions)) +
+plot_q3 <- ggplot(data = fb_ads |> 
+                    filter(office == "US House"), mapping = aes(x = impressions_millions)) +
   geom_histogram()
 
 plot_q3
