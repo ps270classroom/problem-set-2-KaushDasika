@@ -123,9 +123,9 @@ library(ggplot2)
 
 
 fb_ads <- fb_ads |> 
- # mutate(impressions_millions = impressions / 1000000) |> 
+  mutate(impressions_millions = impressions / 1000000) |> 
   filter(office == "US House")
-impressions_millions <- fb_ads$impressions / 1000000
+
 
 
 plot_q3 <- ggplot(data = fb_ads , 
