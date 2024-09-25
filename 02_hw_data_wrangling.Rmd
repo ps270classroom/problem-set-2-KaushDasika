@@ -82,7 +82,7 @@ In the writeup, describe which type of candidate sponsored the most promoting ad
 
 ```{r}
 
-fb_ads <- read_csv("data/fb_ads.csv")
+#fb_ads <- read_csv("data/fb_ads.csv")
 
 #fb_ads <- fb_ads
 
@@ -164,19 +164,19 @@ You do not need to exactly match the labels, but you should have informative lab
 library(ggplot2)
 library(readr)
 
-fb_ads <- read_csv("data/fb_ads.csv")
+#fb_ads <- read_csv("data/fb_ads.csv")
 
-fb_ads <- fb_ads |> 
+#fb_ads <- fb_ads 
+
+
+fb_top_plot <- ggplot(data = fb_ads|> 
   filter(office == "US House") |>
   mutate(impressions_millions = impressions/1000000) |>
   slice_max(impressions_millions, n = 15) |>
   arrange(desc(impressions_millions)) |>
-  mutate(cand_name_last = reorder(cand_name_last,impressions_millions))
-
-
-fb_top_plot <- ggplot(data = fb_ads, 
-                      mapping = aes(x=impressions_millions,y=cand_name_last,fill = party)) + 
-  geom_bar(stat = "identity") + labs(x = "Impressions (in Millions)", y = "Candidate Last Name", 
+  mutate(cand_name_last = reorder(cand_name_last,impressions_millions)), 
+                      mapping = aes(x=impressions_millions,y=cand_name_last)) + 
+  geom_bar(stat = "identity", aes(fill = party)) + labs(x = "Impressions (in Millions)", y = "Candidate Last Name", 
        title = "Top 15 US House Candidates by Facebook Ad Impressions") +
   scale_fill_manual(values = c(R = "red", D = "blue"))
   
