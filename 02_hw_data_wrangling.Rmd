@@ -123,10 +123,10 @@ library(ggplot2)
 
 
 fb_ads <- fb_ads |> 
-  mutate(impressions_millions = (impressions/1000000)) |> 
+  mutate(impressions_millions = impressions / 1000000) |> 
   filter(office == "US House")
 
-
+#fb_ads
  
 
 plot_q3 <- ggplot(data = fb_ads , 
@@ -162,9 +162,11 @@ You do not need to exactly match the labels, but you should have informative lab
 
 ```{r}
 
+fb_top_plot <- ggplot(data = fb_ads |>
+                        arrange(desc(impressions_millions)), aes(x=impressions_millions,y=cand_name_last)) + geom_bar()
 
 
-
+fb_top_plot
 ```
 
 
