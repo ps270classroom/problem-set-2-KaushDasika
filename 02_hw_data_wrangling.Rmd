@@ -119,9 +119,9 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 
 ```{r}
 library(ggplot2)
-library(readr)
+#library(readr)
 
-fb_ads <- read_csv("data/fb_ads.csv")
+#fb_ads <- read_csv("data/fb_ads.csv")
 
 fb_ads <- fb_ads |> 
   mutate(impressions_millions = impressions/1000000)
