@@ -82,9 +82,6 @@ In the writeup, describe which type of candidate sponsored the most promoting ad
 
 ```{r}
 
-#fb_ads <- read_csv("data/fb_ads.csv")
-
-#fb_ads <- fb_ads
 
 party_incumbent_promote <- fb_ads
 
@@ -120,14 +117,9 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 
 ```{r}
 library(ggplot2)
-#library(readr)
-
-#fb_ads <- read_csv("data/fb_ads.csv")
 
 fb_ads <- fb_ads  |> 
   mutate(impressions_millions = impressions/1000000) 
-
-
 
 plot_q3 <- ggplot(data = fb_ads |> 
                     filter(office == "US House"), mapping = aes(x = impressions_millions)) +
@@ -137,7 +129,7 @@ plot_q3
 
 ```
 
-
+As per the data, a majority of the candidates for the US House did not have over 10 million ad impressions on Facebook
 
 \newpage
 
@@ -161,13 +153,6 @@ You do not need to exactly match the labels, but you should have informative lab
 ## Answer 4
 
 ```{r}
-library(ggplot2)
-library(readr)
-
-#fb_ads <- read_csv("data/fb_ads.csv")
-
-#fb_ads <- fb_ads 
-
 
 fb_top_plot <- ggplot(data = fb_ads|> 
   filter(office == "US House") |>
@@ -176,7 +161,7 @@ fb_top_plot <- ggplot(data = fb_ads|>
   arrange(desc(impressions_millions)) |>
   mutate(cand_name_last = reorder(cand_name_last,impressions_millions)), 
                       mapping = aes(x=impressions_millions,y=cand_name_last)) + 
-  geom_bar(stat = "identity", aes(fill = party)) + labs(x = "Impressions (in Millions)", y = "Candidate Last Name", 
+  geom_bar(stat = "identity", aes(fill = party)) + labs(x = "Impressions (in Millions)", y = "Candidate Surname", 
        title = "Top 15 US House Candidates by Facebook Ad Impressions") +
   scale_fill_manual(values = c(R = "red", D = "blue"))
   
