@@ -167,14 +167,12 @@ library(readr)
 fb_ads <- read_csv("data/fb_ads.csv")
 
 fb_ads <- fb_ads |> 
+  filter(office == "US House") |>
   mutate(impressions_millions = impressions/1000000) |>
-  filter(office == "US House")
-
-fb_ads <- fb_ads |>
-  arrange(desc(impressions_millions)) |>
   slice_max(impressions_millions, n = 15) |>
-  mutate(cand_name_last = reorder(cand_name_last, impressions_millions))
-fb_ads
+  arrange(desc(impressions_millions)) |>
+  mutate(cand_name_last = reorder(cand_name_last,impressions_millions))
+
 
 fb_top_plot <- ggplot(data = fb_ads, 
                       mapping = aes(x=impressions_millions,y=cand_name_last,fill = party)) + 
